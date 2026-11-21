@@ -95,3 +95,4 @@ to avoid hitting the Open-Meteo API on every request:
 - `src/Cache/` — PSR-16 file cache with per-entry TTL
 - `tests/` — PHPUnit tests (client hydration, DTO shape, code mapping)
 - `.php-cs-fixer.dist.php` — [PHP-CS-Fixer](https://cs.symfony.com/) config with the `@PSR12` rule set
+- `docs/adr/` — architecture decision records ([ADR 001](docs/adr/001-simple-slim-routes.md): simple Slim routes, [ADR 002](docs/adr/002-custom-file-cache.md): custom PSR-16 file cache)
