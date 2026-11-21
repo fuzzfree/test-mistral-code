@@ -17,6 +17,7 @@ use function json_decode;
 use function round;
 use function sprintf;
 use function trim;
+
 use const JSON_THROW_ON_ERROR;
 
 final class OpenMeteoClient
