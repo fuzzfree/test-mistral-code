@@ -54,7 +54,7 @@ final class FileCache implements CacheInterface
         }
 
         if ($this->expired($payload)) {
-            $this->purge($key);
+            $this->delete($key);
 
             return $default;
         }
@@ -83,7 +83,7 @@ final class FileCache implements CacheInterface
             return true;
         }
 
-        return unlink($file);
+        return @unlink($file);
     }
 
     public function clear(): bool
@@ -150,17 +150,12 @@ final class FileCache implements CacheInterface
         }
 
         if ($this->expired($payload)) {
-            $this->purge($key);
+            $this->delete($key);
 
             return false;
         }
 
         return true;
-    }
-
-    private function purge(string $key): void
-    {
-        @unlink($this->filename($key));
     }
 
     /**
