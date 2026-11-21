@@ -8,7 +8,7 @@
 
 ## Getting started
 
-Requirements: PHP 8.4+ and Composer.
+Requirements: PHP 8.5+ and Composer.
 
 ```bash
 composer install
