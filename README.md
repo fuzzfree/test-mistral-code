@@ -6,6 +6,7 @@
 - Use latest phpstan version with level 9
 - Use latest phpunit
 - Use latest php-cs-fixer with the [PSR12](https://cs.symfony.com/doc/ruleSets/PSR12.html) rule set
+- File based caching with 5 minutes TTL
 
 ## Getting started
 
@@ -76,10 +77,22 @@ description, day/night flag, and wind speed/direction, using the
 }
 ```
 
+## Caching
+
+`GET /weather` responses are cached on disk for **5 minutes** (300 seconds)
+to avoid hitting the Open-Meteo API on every request:
+
+- `src/Cache/FileCache.php` — small PSR-16 (`psr/simple-cache`) file cache:
+  each entry is a serialized payload with its expiry stored as a hashed file
+  in the cache directory (default: `sys_get_temp_dir()/test-mistral-code-cache`)
+- `src/Weather/CachedOpenMeteoClient.php` — serves `Weather` from the cache
+  when fresh, otherwise fetches from Open-Meteo and stores the result
+
 ## Layout
 
 - `public/index.php` — Slim application and routes
 - `src/Http/` — fetcher abstraction with a `get(string $url): string` client
-- `src/Weather/` — Open-Meteo client, weather DTO, WMO code descriptions
+- `src/Weather/` — Open-Meteo client, cached client decorator, weather DTO, WMO code descriptions
+- `src/Cache/` — PSR-16 file cache with per-entry TTL
 - `tests/` — PHPUnit tests (client hydration, DTO shape, code mapping)
 - `.php-cs-fixer.dist.php` — [PHP-CS-Fixer](https://cs.symfony.com/) config with the `@PSR12` rule set

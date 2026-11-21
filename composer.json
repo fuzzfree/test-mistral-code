@@ -7,7 +7,8 @@
         "php": "^8.5",
         "ext-json": "*",
         "slim/slim": "^4.14",
-        "slim/psr7": "^1.7"
+        "slim/psr7": "^1.7",
+        "psr/simple-cache": "^3.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.87",
