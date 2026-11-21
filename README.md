@@ -5,6 +5,7 @@
 - Use latest php version with strict types
 - Use latest phpstan version with level 9
 - Use latest phpunit
+- Use latest php-cs-fixer with the [PSR12](https://cs.symfony.com/doc/ruleSets/PSR12.html) rule set
 
 ## Getting started
 
@@ -15,6 +16,12 @@ composer install
 
 # run static analysis (level 9)
 composer stan
+
+# check code style ([PSR12](https://cs.symfony.com/doc/ruleSets/PSR12.html))
+composer cs-check
+
+# fix code style ([PSR12](https://cs.symfony.com/doc/ruleSets/PSR12.html))
+composer cs-fix
 
 # run the test suite
 composer test
@@ -75,3 +82,4 @@ description, day/night flag, and wind speed/direction, using the
 - `src/Http/` — fetcher abstraction with a `get(string $url): string` client
 - `src/Weather/` — Open-Meteo client, weather DTO, WMO code descriptions
 - `tests/` — PHPUnit tests (client hydration, DTO shape, code mapping)
+- `.php-cs-fixer.dist.php` — [PHP-CS-Fixer](https://cs.symfony.com/) config with the `@PSR12` rule set
