@@ -1,0 +1,5 @@
+- Simple Slim php app to fetch weather data for Volos (Greece) from https://open-meteo.com/en/docs
+- Use latest slim version
+- Use latest php version with strict types
+- Use latest phpstan version with level 9
+- Use latest phpunit
