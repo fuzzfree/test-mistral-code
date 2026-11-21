@@ -1,12 +1,11 @@
 # test-mistral-code
 
-- Simple Slim php app to fetch weather data for Volos (Greece) from https://open-meteo.com/en/docs
-- Use latest slim version
-- Use latest php version with strict types
-- Use latest phpstan version with level 9
-- Use latest phpunit
-- Use latest php-cs-fixer with the [PSR12](https://cs.symfony.com/doc/ruleSets/PSR12.html) rule set
-- File based caching with 5 minutes TTL
+- Simple Slim PHP app to fetch weather data for Volos (Greece) from https://open-meteo.com/en/docs
+- Use latest Slim version
+- Use latest PHP version with Strict Types
+- Use latest PHPStan version with Level 9
+- Use latest PHPUnit
+- Use latest PHP Coding Standards Fixer with the [PSR12](https://cs.symfony.com/doc/ruleSets/PSR12.html) rule set
 
 ## Getting started
 
