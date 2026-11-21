@@ -1,0 +1,30 @@
+{
+    "name": "fuzzfree/test-mistral-code",
+    "description": "Simple Slim PHP app fetching weather data for Volos (Greece) from Open-Meteo",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.4",
+        "ext-json": "*",
+        "slim/slim": "^4.14",
+        "slim/psr7": "^1.7"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "stan": "phpstan analyse --memory-limit=512M"
+    }
+}
