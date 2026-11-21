@@ -81,6 +81,21 @@ final class FileCacheTest extends TestCase
         self::assertFalse($this->cache->has('short'));
     }
 
+    public function testExpiredEntryFileIsDeletedOnRead(): void
+    {
+        $this->cache->set('short', 'v', 0);
+
+        /** @var list<string> $filesBefore */
+        $filesBefore = glob($this->directory . '/*.cache') ?: [];
+        self::assertCount(1, $filesBefore);
+
+        self::assertNull($this->cache->get('short'));
+
+        /** @var list<string> $filesAfter */
+        $filesAfter = glob($this->directory . '/*.cache') ?: [];
+        self::assertCount(0, $filesAfter);
+    }
+
     public function testDateIntervalTtl(): void
     {
         self::assertTrue($this->cache->set('interval', 'v', new DateInterval('PT5M')));

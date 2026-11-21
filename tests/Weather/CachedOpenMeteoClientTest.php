@@ -76,6 +76,19 @@ final class CachedOpenMeteoClientTest extends TestCase
         self::assertCount(1, $fetcher->requests);
     }
 
+    public function testExpiredEntryTriggersRefetch(): void
+    {
+        $fetcher = new FakeHttpFetcher();
+        $fetcher->responses[$this->urlFor()] = self::FIXTURE;
+        $cache = new FileCache($this->cacheDir());
+        $client = new CachedOpenMeteoClient(new OpenMeteoClient($fetcher), $cache, 0);
+
+        $client->volosCurrentWeather();
+        $client->volosCurrentWeather();
+
+        self::assertCount(2, $fetcher->requests);
+    }
+
     public function testHitReturnsCachedWeatherWithoutFetching(): void
     {
         $fetcher = new FakeHttpFetcher();

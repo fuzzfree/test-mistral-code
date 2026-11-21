@@ -47,7 +47,8 @@ Open-Meteo client. Entries are stored as hashed files containing a serialized
 - All behavior is explicit and covered by unit tests (expiry, corrupted
   entries, invalid keys); nothing to debug inside a third-party adapter.
 - We own the trade-offs ourselves: `serialize()` round-trips values, storage
-  is per-machine (no shared cache across servers), and expired files are
-  overwritten lazily rather than garbage-collected. These limitations are
+  is per-machine (no shared cache across servers), and expired entries are
+  cleaned up lazily — deleted on first access after expiry, then refreshed by
+  the next fetch through `CachedOpenMeteoClient`. These limitations are
   acceptable for a single-host, single-key cache; revisit this ADR if the app
   is deployed multi-host or the key space grows.

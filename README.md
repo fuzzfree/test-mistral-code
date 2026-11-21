@@ -83,9 +83,11 @@ to avoid hitting the Open-Meteo API on every request:
 
 - `src/Cache/FileCache.php` — small PSR-16 (`psr/simple-cache`) file cache:
   each entry is a serialized payload with its expiry stored as a hashed file
-  in the cache directory (default: `sys_get_temp_dir()/test-mistral-code-cache`)
+  in the cache directory (default: `sys_get_temp_dir()/test-mistral-code-cache`);
+  expired entries are removed on first access
 - `src/Weather/CachedOpenMeteoClient.php` — serves `Weather` from the cache
-  when fresh, otherwise fetches from Open-Meteo and stores the result
+  when fresh; after the TTL elapses it refetches from Open-Meteo, deletes the
+  expired file, and stores the new result
 
 ## Layout
 

@@ -49,7 +49,13 @@ final class FileCache implements CacheInterface
     {
         $payload = $this->payload($key);
 
-        if (null === $payload || $this->expired($payload)) {
+        if (null === $payload) {
+            return $default;
+        }
+
+        if ($this->expired($payload)) {
+            $this->purge($key);
+
             return $default;
         }
 
@@ -139,7 +145,22 @@ final class FileCache implements CacheInterface
     {
         $payload = $this->payload($key);
 
-        return null !== $payload && !$this->expired($payload);
+        if (null === $payload) {
+            return false;
+        }
+
+        if ($this->expired($payload)) {
+            $this->purge($key);
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private function purge(string $key): void
+    {
+        @unlink($this->filename($key));
     }
 
     /**
