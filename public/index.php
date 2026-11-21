@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Cache\FileCache;
 use App\Http\BuiltInHttpFetcher;
+use App\Weather\CachedOpenMeteoClient;
 use App\Weather\OpenMeteoClient;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -14,7 +16,11 @@ $app = AppFactory::create();
 
 $app->addErrorMiddleware(true, true, true);
 
-$client = new OpenMeteoClient(new BuiltInHttpFetcher());
+$cache = new FileCache(sys_get_temp_dir() . '/test-mistral-code-cache');
+$client = new CachedOpenMeteoClient(
+    new OpenMeteoClient(new BuiltInHttpFetcher()),
+    $cache,
+);
 
 $app->get('/', function (Request $request, Response $response): Response {
     $response->getBody()->write(
